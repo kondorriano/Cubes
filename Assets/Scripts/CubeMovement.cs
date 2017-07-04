@@ -5,7 +5,12 @@ using UnityEngine;
 public class CubeMovement : MonoBehaviour {
 
     protected Rigidbody myRig;
+    protected Animator myAnim;
     public float speed = 5f;
+
+    float idleCounter = 0;
+    float idleTime = .5f;
+    bool staying = true;
 
     //Knives thingy
     protected Transform myKnife = null;
@@ -13,12 +18,33 @@ public class CubeMovement : MonoBehaviour {
     // Use this for initialization
     protected virtual void Start () {
         myRig = GetComponent<Rigidbody>();
+        myAnim = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	protected virtual void Update () {
-		
+        
 	}
+
+    protected virtual void LateUpdate()
+    {
+        float velocity = myRig.velocity.magnitude;
+        myAnim.SetFloat("Speed", velocity);
+        if (velocity == 0)
+        {
+            idleCounter -= Time.deltaTime;
+            if (!staying && idleCounter <= 0)
+            {
+                staying = true;
+                myAnim.SetTrigger("Staying");
+            }
+        }
+        else
+        {
+            idleCounter = idleTime;
+            staying = false;
+        }
+    }
 
     protected void MoveCharacter(float yVel, float xVel)
     {
@@ -27,6 +53,8 @@ public class CubeMovement : MonoBehaviour {
         myRig.velocity = speed * (Vector3.forward * dir.y + Vector3.right * dir.x);
         if (myRig.velocity.magnitude < 0.2) return;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(myRig.velocity.normalized), 0.4f);
+
+
     }
 
     public bool HasKnife()
