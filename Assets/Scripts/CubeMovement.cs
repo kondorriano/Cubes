@@ -14,6 +14,11 @@ public class CubeMovement : MonoBehaviour {
 
     //Knives thingy
     protected Transform myKnife = null;
+
+    //Faces
+    public Renderer faceRend;
+    //Hand
+    public Transform hand;
    
     // Use this for initialization
     protected virtual void Start () {
@@ -46,11 +51,11 @@ public class CubeMovement : MonoBehaviour {
         }
     }
 
-    protected void MoveCharacter(float yVel, float xVel)
+    protected void MoveCharacter(float yVel, float xVel, float speedValue)
     {
         Vector2 dir = new Vector2(xVel, yVel);
         dir.Normalize();
-        myRig.velocity = speed * (Vector3.forward * dir.y + Vector3.right * dir.x);
+        myRig.velocity = speed * speedValue * (Vector3.forward * dir.y + Vector3.right * dir.x);
         if (myRig.velocity.magnitude < 0.2) return;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(myRig.velocity.normalized), 0.4f);
 
@@ -66,13 +71,20 @@ public class CubeMovement : MonoBehaviour {
     {
         Transform knife = myKnife;
         myKnife = otherKnife;
-        if (myKnife != null)
-        {
-            myKnife.SetParent(transform);
-            myKnife.localPosition = Vector3.up;
-        }
-        //set real knife position
+        if (myKnife != null) SetKnifePosition();
+
         return knife;
+    }
+
+    protected void SetKnifePosition()
+    {
+        myKnife.SetParent(hand);
+        myKnife.localPosition = Vector3.zero;
+    }
+
+    public virtual void SetCoolFace(Texture tex)
+    {
+        faceRend.material.mainTexture = tex;
     }
 }
 

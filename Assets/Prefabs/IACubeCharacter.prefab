@@ -227,9 +227,10 @@ GameObject:
   - component: {fileID: 54553412432911116}
   - component: {fileID: 95851659371873926}
   - component: {fileID: 114291749795189948}
+  - component: {fileID: 136416139926524268}
   m_Layer: 0
   m_Name: IACubeCharacter
-  m_TagString: Untagged
+  m_TagString: cube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -345,7 +346,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1620556847017954}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1103,6 +1104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  faceRend: {fileID: 23914754225133218}
+  hand: {fileID: 4261053219923386}
 --- !u!114 &114736390811016514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1115,3 +1118,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineMat: {fileID: 2100000, guid: 1f51a423a9dec1948815d40067944eda, type: 2}
+--- !u!136 &136416139926524268
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620556847017954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.25
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

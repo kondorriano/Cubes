@@ -41,9 +41,10 @@ GameObject:
   - component: {fileID: 54876368398063536}
   - component: {fileID: 114276832937420644}
   - component: {fileID: 95192119418419708}
+  - component: {fileID: 136100977362715948}
   m_Layer: 0
   m_Name: CubeCharacter
-  m_TagString: Untagged
+  m_TagString: cube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -446,7 +447,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1140473999337610}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1103,6 +1104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  faceRend: {fileID: 23400774465266510}
+  hand: {fileID: 4819409159699226}
+  coolFace: {fileID: 0}
+  angryFace: {fileID: 0}
 --- !u!114 &114412502211353126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1115,3 +1120,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineMat: {fileID: 2100000, guid: 1f51a423a9dec1948815d40067944eda, type: 2}
+--- !u!136 &136100977362715948
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1140473999337610}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

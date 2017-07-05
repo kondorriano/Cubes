@@ -6,13 +6,45 @@ public class PlayerMovement : CubeMovement{
    
     Transform touchedKnife = null;
     Transform touchedCube = null;
+
+    public Texture coolFace;
+    public Texture angryFace;
+
+    bool running = false;
   
     // Update is called once per frame
     protected override void Update () {
         float yVel = Input.GetAxis("Vertical");
         float xVel = Input.GetAxis("Horizontal");
-        MoveCharacter(yVel, xVel);
+        float speedValue = (Input.GetKey(KeyCode.X)) ? 2 : 1;
+        MoveCharacter(yVel, xVel, speedValue);
         KnifeStuff();
+
+        if(myRig.velocity.magnitude > speed*1.1f && !running)
+        {
+            running = true;
+            SetFace(angryFace);
+        } else if(myRig.velocity.magnitude <= speed && running)
+        {
+            running = false;
+            SetFace(coolFace);
+        }
+    }
+
+    public override void SetCoolFace(Texture tex)
+    {
+        coolFace = tex;
+        base.SetCoolFace(tex);
+    }
+
+    void SetFace(Texture tex)
+    {
+        faceRend.material.mainTexture = tex;
+    }
+
+    public void SetAngryFace(Texture tex)
+    {
+        angryFace = tex;
     }
 
     void KnifeStuff()
@@ -28,9 +60,7 @@ public class PlayerMovement : CubeMovement{
             myKnife = touchedKnife;
             touchedKnife = null;
 
-            myKnife.SetParent(transform);
-            myKnife.localPosition = Vector3.up;
-            //set real knife position
+            SetKnifePosition();
             
         }
         else if (touchedCube != null)
@@ -39,12 +69,7 @@ public class PlayerMovement : CubeMovement{
             if (myKnife != null || mov.HasKnife())
             {
                 myKnife = mov.SwapKnives(myKnife);
-                if (myKnife != null)
-                {
-                    myKnife.SetParent(transform);
-                    myKnife.localPosition = Vector3.up;
-                }
-                //set real knife position
+                if (myKnife != null) SetKnifePosition();
             }
         }
 

@@ -19,7 +19,7 @@ public class IAMovement : CubeMovement {
     // Update is called once per frame
     protected override void Update () {
         IAcounter();
-        MoveCharacter(xDir, yDir);
+        MoveCharacter(xDir, yDir, 1);
         //myRig.velocity = Vector3.zero;
 	}
 
